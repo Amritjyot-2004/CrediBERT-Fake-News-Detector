@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrediBERT - Fake News Detector</title>
+    <link rel = "stylesheet"
+        href = "static/css/style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>CrediBERT</h1>
+        <h2>Your Personalised Fake News Detector</h2>
+        <p>Insert the news headline to validate its authenticity</p>
+        <div id="chat-history">
+        <div id="input-container">
+            <table>
+            <form action = "{{url_for('predict')}}" method="post">
+            <tr>
+            <td><input type="text" id="user-input" name = "headline" placeholder="Insert News Headline">
+            <button id="send-button">&#x27A4;</button></td>
+            </form>
+            </tr>
+            <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+            <tr>
+            <form action = "{{url_for('history')}}" method = "post">
+                <td><button id="history-button">View Chat History</button></td>
+            </form>
+            </tr>
+            </table>
+        </div>
+        {% if history %}
+            <h2>Chat History</h2>
+            {{ history|safe }}
+        {% endif %}
+        {% if pred_text %}
+        <h3 style = "text-align: center;">Prediction</h3>
+        <p style = "text-align: center;">{{ pred_text }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
